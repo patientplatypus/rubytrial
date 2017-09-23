@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   #   :find_user
   # end
 
-  # before_action :find_user except: []
+  before_action :find_user, except: []
 
   # GET /posts
   def index
@@ -24,8 +24,8 @@ class PostsController < ApplicationController
   # POST /posts
   def create
     # @post = Post.new(post_params)
-    # @post = @user.posts.create(post_params)
-    @post = User.find_by(email: params[:user_email]).posts.create(post_params)
+    @post = @user.posts.create(post_params)
+    # @post = User.find_by(email: params[:user_email]).posts.create(post_params)
     if @post.save
       render json: @post, status: :created, location: @post
     else
